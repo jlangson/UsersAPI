@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
@@ -28,7 +29,10 @@ public class UserController {
     UserRepository userRepository;
     
     @GetMapping(value = "/users")
-    public List<User> getUsers(){
+    public List<User> getUsers(@RequestParam(value="state", required=false) String state){
+        if(state!=null){
+            return (List<User>) userRepository.findUsersByState(state);
+        }
         return (List<User>) userRepository.findAll();
     }
     
@@ -51,4 +55,6 @@ public class UserController {
     public void createUser(@PathVariable(value="id") Long id){
     userRepository.deleteById(id);
     }
+    
+    
 }
