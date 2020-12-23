@@ -29,7 +29,7 @@ import lombok.NoArgsConstructor;
 public class User {
     @ApiModelProperty(notes = "The user id")
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ApiModelProperty(notes = "First name")
